@@ -1,102 +1,86 @@
 <!DOCTYPE html>
-<html>
+<html lang="uk">
 <head>
 <meta charset="UTF-8">
-<body>
-
-    <audio id="ambient" autoplay loop>
-        <source src="staticheskiy-tv-shum-2.mp3" type="audio/mpeg">
-    </audio>
-
-    <audio id="errorSound">
-    <source src="windows-xp-kriticheskaya-oshybka.mp3" type="audio/mpeg">
-</audio>
-    
-   
-    </body>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
 body{
-    background:black;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    height:100vh;
-    margin:0;
-
+    background: black;
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-input{
-    width:250px;
-    padding:15px;
-    background:black;
-    border:2px solid #00ff00;
-    color:#00ff00;
-    font-size:25px;
-    text-align:center;
+.pc{
+    position: relative;
 }
 
-input::placeholder{
-    color:#00aa00;
+img{
+    position: relative;
+    z-index: 2;
+    width: 650px;
+    pointer-events: none;
 }
 
-#message {
-    position: fixed;
-    top: 30px;
-    left: 50%;
-    transform: translateX(-50%);
-    color: #00ff00;
-    font-size: 20px;
-    font-family: monospace;
-    text-align: center;
+iframe{
+    position: absolute;
+    top: 90px;
+    left: 130px;
+    width: 360px;
+    height: 270px;
+    border: none;
+    z-index: 1;
+}
+
+.screen{
+    position: absolute;
+    top: 62px;
+    left: 150px;
+    width: 345px;
+    height: 260px;
+    cursor: pointer;
+    z-index: 3;
 }
 </style>
 </head>
 
 <body>
 
-<input id="code" placeholder="Введіть код">
+<audio id="ambient" autoplay>
+    <source src="windows-7-privetstvie.mp3" type="audio/mpeg">
+</audio>
+
+<div class="pc">
+
+    <img src="pc16.png" alt="Комп'ютер">
+
+    <div id="button" class="screen"></div>
+
+    <iframe
+        id="video"
+        src=""
+        allow="autoplay; encrypted-media"
+        allowfullscreen>
+    </iframe>
+
+</div>
 
 <script>
+const button = document.getElementById("button");
 
-const input = document.getElementById("code");
+function playVideo() {
+    document.getElementById("video").src =
+        "https://www.youtube.com/embed/z2X4EVhDQr8?autoplay=1";
 
-input.addEventListener("input", function () {
+    button.style.display = "none";
+}
 
-    if (this.value.length === 4) {
-
-        if (this.value === "1611") {
-
-            window.location.href = "pc.html";
-
-        } else if (this.value === "6037") {
-
-            const msg = document.getElementById("message");
-
-msg.innerText = "Тимчасово пошта не працює";
-
-setTimeout(() => {
-    msg.innerText = "";
-}, 6000);
-
-this.value = "";
-
-        } else {
-
-            document.getElementById("errorSound").play();
-
-            this.value = "";
-        }
-    }
-});
-
+// Працює і на ПК, і на телефонах
+button.addEventListener("pointerdown", playVideo);
 </script>
-
-<p id="message"></p>
-
-
-
-
 
 </body>
 </html>
