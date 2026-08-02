@@ -1,39 +1,31 @@
 <!DOCTYPE html>
-<html>
+<html lang="uk">
 <head>
 <meta charset="UTF-8">
-
-<body>
-
-    <audio id="ambient" autoplay>
-        <source src="windows-7-privetstvie.mp3" type="audio/mpeg">
-    </audio>
-    
-   
-    </body>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
 body{
-    background:black;
-    margin:0;
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
+    background: black;
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .pc{
-    position:relative;
+    position: relative;
 }
 
-img {
+img{
     position: relative;
     z-index: 2;
     width: 650px;
     pointer-events: none;
 }
 
-iframe {
+iframe{
     position: absolute;
     top: 90px;
     left: 130px;
@@ -43,7 +35,7 @@ iframe {
     z-index: 1;
 }
 
-.screen {
+.screen{
     position: absolute;
     top: 62px;
     left: 150px;
@@ -57,28 +49,37 @@ iframe {
 
 <body>
 
-    <div class="pc">
+<audio id="ambient" autoplay>
+    <source src="windows-7-privetstvie.mp3" type="audio/mpeg">
+</audio>
 
-        <img src="pc16.png">
-    
-        <div id="button" class="screen"
-             onclick="playVideo()"></div>
-    
-        <iframe
-            id="video"
-            src="">
-        </iframe>
-    
-    </div>
+<div class="pc">
+
+    <img src="pc16.png" alt="Комп'ютер">
+
+    <div id="button" class="screen"></div>
+
+    <iframe
+        id="video"
+        src=""
+        allow="autoplay; encrypted-media"
+        allowfullscreen>
+    </iframe>
+
+</div>
 
 <script>
+const button = document.getElementById("button");
+
 function playVideo() {
+    document.getElementById("video").src =
+        "https://www.youtube.com/embed/z2X4EVhDQr8?autoplay=1";
 
-document.getElementById("video").src =
-   "https://www.youtube.com/embed/z2X4EVhDQr8?autoplay=1";
-
-document.getElementById("button").style.display = "none";
+    button.style.display = "none";
 }
+
+// Працює і на ПК, і на телефонах
+button.addEventListener("pointerdown", playVideo);
 </script>
 
 </body>
